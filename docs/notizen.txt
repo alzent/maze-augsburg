@@ -1,0 +1,114 @@
+
+
+#####################################
+Divers
+#####################################
+
+-- Log-Ausgaben einer Lambda-Funktion anzapfen
+$ sam logs --cw-log-group /aws/lambda/maze-berlin-lambda --tail
+
+
+#####################################
+aws lambda invoke 
+#####################################
+
+Funktioniert
+---------------------------
+aws lambda invoke --invocation-type RequestResponse --region eu-central-1 --function-name lambdaeval-HelloWorldFunction-d0f3gx3QLnJr --cli-binary-format raw-in-base64-out --payload '["John","Bob"]' --log-type Tail outputfile.txt
+
+
+Funktioniert nicht:
+------------------------
+aws lambda invoke --invocation-type RequestResponse --region eu-central-1 --function-name lambdaeval-HelloWorldFunction-d0f3gx3QLnJr --cli-binary-format raw-in-base64-out --payload /home/azent/eval/lambdaeval/input.txt --log-type Tail outputfile.txt
+
+
+
+##################################### #####################################
+COOKBOOK - Your first Lambda with AWS CLI
+##################################### #####################################
+
+
+## S3 Bucket erstellen
+################################
+aws s3api create-bucket \
+--bucket bucket-for-cookbook
+
+
+aws s3 cp target/original-lambda-handler-with-pojos-0.0.1-SNAPSHOT.jar s3://bucket-for-cookbook/lambda-handler-with-pojos-0.0.1-SNAPSHOT.jar
+
+
+aws iam create-policy \
+--policy-name policy-4-lambda-handler-with-pojos \
+--policy-document file://basic-lambda-permissions.txt
+
+
+aws iam create-role \
+--role-name role-4-lambda-handler-with-pojos \
+--assume-role-policy-document file://iam-role-trust-relationship.json
+
+
+aws iam attach-role-policy \
+--role-name role-4-lambda-handler-with-pojos \
+--policy-arn arn:aws:iam::543835060909:policy/policy-4-lambda-handler-with-pojos
+
+
+aws lambda create-function \
+--function-name function-lambda-handler-with-pojos \
+--runtime java11 \
+--code S3Bucket=bucket-for-cookbook,S3Key=lambda-handler-with-pojos-0.0.1-SNAPSHOT.jar \
+--handler tech.heartin.books.serverlesscookbook.MyLambdaHandler::handleRequest \
+--role arn:aws:iam::543835060909:role/role-4-lambda-handler-with-pojos \
+--timeout 15 \
+--memory-size 512 \
+--region us-east-1
+
+
+## Lambda Aufruf
+################################
+aws lambda invoke \
+--invocation-type RequestResponse \
+--function-name function-lambda-handler-with-pojos \
+--log-type Tail \
+--cli-binary-format raw-in-base64-out \
+--payload '{"name":"Heartin"}' \
+--region us-east-1 \
+response.json
+
+
+## Resourcen löschen
+################################
+aws lambda delete-function \
+--function-name function-lambda-handler-with-pojos \
+--region us-east-1
+
+
+## Detach policy from the role
+################################
+aws iam detach-role-policy \
+--role-name role-4-lambda-handler-with-pojos \
+--policy-arn arn:aws:iam::543835060909:policy/policy-4-lambda-handler-with-pojos
+
+
+## Delete a role
+################################
+aws iam delete-role \
+--role-name role-4-lambda-handler-with-pojos
+
+
+## Delete policy
+################################
+aws iam delete-policy \
+--policy-arn arn:aws:iam::543835060909:policy/policy-4-lambda-handler-with-pojos
+
+
+
+
+
+
+
+
+
+
+
+
+
