@@ -26,7 +26,7 @@ public class LambdaInvokeMain {
 
     public static void invokeRemoteLambdaFunction(LambdaClient lambdaClient, String functionName) {
 
-        InvokeResponse res = null ;
+        InvokeResponse res;
         try {
 
             // Need a SdkBytes instance for the payload.
