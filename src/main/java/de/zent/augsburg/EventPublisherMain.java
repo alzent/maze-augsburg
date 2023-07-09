@@ -12,6 +12,8 @@ public class EventPublisherMain {
 
     public static void main(String[] args) {
 
+// jut a comment line 12:51
+        
         AmazonEventBridge client = AmazonEventBridgeClient.builder()
                 .withRegion(Regions.EU_CENTRAL_1)
                 .withCredentials(new DefaultAWSCredentialsProviderChain())
