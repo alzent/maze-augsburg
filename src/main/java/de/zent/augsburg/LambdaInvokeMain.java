@@ -30,6 +30,7 @@ public class LambdaInvokeMain {
         try {
 
             // Need a SdkBytes instance for the payload.
+            // Just a second line
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("source", "de.zent.maze");
             jsonObj.put("detail-type", "Berlin Incoming Event Notification");
