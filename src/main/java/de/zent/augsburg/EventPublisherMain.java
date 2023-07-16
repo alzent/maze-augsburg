@@ -15,7 +15,11 @@ public class EventPublisherMain {
 
     public static void main(String[] args) {
 
-// jut a comment line 12:51
+        // jut a comment line 12:51
+        // second commetn line 12:30
+        // third line 13:24
+        // fourth line
+        // fifth line
         
         AmazonEventBridge client = AmazonEventBridgeClient.builder()
                 .withRegion(Regions.EU_CENTRAL_1)
@@ -32,6 +36,14 @@ public class EventPublisherMain {
         putEvents(client, src, detailType, busName);
     }
 
+    /**
+     * Methode zum Event push
+     *
+     * @param client
+     * @param src
+     * @param detailType
+     * @param busName
+     */
     private static void putEvents(AmazonEventBridge client, String src, String detailType, String busName) {
 
         PutEventsRequestEntry requestEntry = new PutEventsRequestEntry();
