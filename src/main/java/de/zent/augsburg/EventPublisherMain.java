@@ -16,6 +16,7 @@ public class EventPublisherMain {
         // second commetn line 12:30
         // third line 13:24
         // fourth line
+        // fifth line
         
         AmazonEventBridge client = AmazonEventBridgeClient.builder()
                 .withRegion(Regions.EU_CENTRAL_1)
