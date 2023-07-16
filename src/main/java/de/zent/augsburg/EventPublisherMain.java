@@ -12,7 +12,8 @@ public class EventPublisherMain {
 
     public static void main(String[] args) {
 
-// jut a comment line 12:51
+        // jut a comment line 12:51
+        // second commetn line 12:30
         
         AmazonEventBridge client = AmazonEventBridgeClient.builder()
                 .withRegion(Regions.EU_CENTRAL_1)
