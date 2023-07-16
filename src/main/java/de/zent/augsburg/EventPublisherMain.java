@@ -8,6 +8,9 @@ import com.amazonaws.services.eventbridge.model.PutEventsRequest;
 import com.amazonaws.services.eventbridge.model.PutEventsRequestEntry;
 import com.amazonaws.services.eventbridge.model.PutEventsResult;
 
+/**
+ * Klasse EventPublisherMain
+ */
 public class EventPublisherMain {
 
     public static void main(String[] args) {
