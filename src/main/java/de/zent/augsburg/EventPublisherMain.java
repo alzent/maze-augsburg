@@ -36,6 +36,14 @@ public class EventPublisherMain {
         putEvents(client, src, detailType, busName);
     }
 
+    /**
+     * Methode zum Event push
+     *
+     * @param client
+     * @param src
+     * @param detailType
+     * @param busName
+     */
     private static void putEvents(AmazonEventBridge client, String src, String detailType, String busName) {
 
         PutEventsRequestEntry requestEntry = new PutEventsRequestEntry();
