@@ -40,7 +40,7 @@ public class EventPublisherMain {
      * Methode zum Event push
      *
      * @param client
-     * @param src
+     * @param src - Source String (Input)
      * @param detailType
      * @param busName
      */
